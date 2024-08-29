@@ -13,3 +13,14 @@ exports.getHome = async (req, res) =>{
         res.status(500).send('Internal Server Error');
     }
 }
+
+exports.addStudent = async (req, res) => {
+    try{
+        const student = new StudentRecord({ name: req.body.name, email: req.body.email});
+        await student.save();
+        res.redirect('/home');
+    }catch(error){
+       console.log('Error Adding Student');
+       res.status(500).send('Internal Server Error');
+    }
+};
